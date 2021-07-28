@@ -17,7 +17,7 @@ class CapinhaController {
     @PostMapping
     fun create(@RequestBody capinha: Capinha): ResponseEntity<Any> {
         this.capinhaService.create(capinha)
-        return ResponseEntity(capinha, HttpStatus.OK)
+        return ResponseEntity(capinha, HttpStatus.CREATED)
     }
 
     @GetMapping
@@ -33,8 +33,8 @@ class CapinhaController {
     }
 
     @PutMapping("/{id}")
-    fun update(@PathVariable id: Long, @RequestBody capinha: Capinha) =
-            this.capinhaService.update(id, capinha)
+    fun update(@PathVariable id: Long, @RequestBody capinha: Capinha): ResponseEntity<Any> =
+            ResponseEntity(this.capinhaService.update(id, capinha), HttpStatus.OK)
 
     @GetMapping("/{id}")
     fun getById(@PathVariable id: Long): ResponseEntity<Any> {
