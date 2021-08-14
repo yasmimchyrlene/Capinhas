@@ -1,2 +1,2 @@
 # capinhas
-CRUD para capinhas de celular
+CRUD para capinhas de celular com mysql
