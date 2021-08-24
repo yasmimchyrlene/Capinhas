@@ -23,7 +23,7 @@ class CapinhaServiceImpl : CapinhaService {
     }
 
     override fun update(id: Long, capinha: Capinha) {
-        capinhaRepository.save(Capinha(id, capinha.modelo, capinha.cor, capinha.preco))
+        capinhaRepository.save(Capinha(id, capinha.modelo, capinha.cor, capinha.antiImpacto, capinha.preco))
     }
 
     override fun getAll(): List<Capinha> {

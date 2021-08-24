@@ -9,8 +9,9 @@ import javax.persistence.Id
 data class Capinha(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        val id: Long,
+        val id: Long? = null,
         val modelo: String = "",
         val cor: String = "",
+        val antiImpacto: Boolean = true,
         val preco: Double = 0.0,
 )

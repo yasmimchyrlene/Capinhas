@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping(value = ["/capinhas"])
-@Api(value="API REST Capinhas")
+@Api(value = "API REST Capinhas")
 class CapinhaController {
 
     @Autowired
