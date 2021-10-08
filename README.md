@@ -9,7 +9,6 @@ Tendo como tecnologias e padrões utilizados para o desenvolvimento dessa API:
 - REST
 - MVC
 - SOLID
-- LOGGER  
 - MySQL
 
 ![](img/fluxo_da_aplicacao.png)
@@ -38,7 +37,7 @@ Dependência para verificar a saúde da aplicação
 Dependência para documentar a API
 
 ```gradle
-        <dependency>
+               <dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
 			<version>3.0.0</version>
