@@ -1,4 +1,4 @@
-package com.capinhas.capinhas
+package com.capinhas.capinhas.TestController
 
 import com.capinhas.capinhas.controller.CapinhaController
 import com.capinhas.capinhas.model.Capinha
@@ -35,7 +35,7 @@ class CapinhaControllerTest {
     @Test
     fun deveriaCriarACapinha(){
         //doNothing só para VOID(UNIT) sem retorno.
-        doNothing().`when`(capinhaService).create(capinha)
+        `when`(capinhaService.create(capinha)).thenReturn(capinha)
         var result = capinhaController.create(capinha)
         Assert.assertEquals("deveria criar a capinha",capinha,result.getBody());
     }

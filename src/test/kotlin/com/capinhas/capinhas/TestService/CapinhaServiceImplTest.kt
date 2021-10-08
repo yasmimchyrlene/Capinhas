@@ -1,10 +1,8 @@
-package com.capinhas.capinhas
+package com.capinhas.capinhas.TestService
 
-import com.capinhas.capinhas.controller.handler.exception.NotFoundException
 import com.capinhas.capinhas.model.Capinha
 import com.capinhas.capinhas.repository.CapinhaRepository
-import com.capinhas.capinhas.service.CapinhaService
-import com.capinhas.capinhas.service.CapinhaServiceImpl
+import com.capinhas.capinhas.service.serviceImpl.CapinhaServiceImpl
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -14,7 +12,6 @@ import org.mockito.Mock
 import org.mockito.Mockito.*
 import org.mockito.junit.MockitoJUnitRunner
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.data.jpa.domain.AbstractPersistable_.id
 import java.util.*
 
 @SpringBootTest
@@ -38,7 +35,7 @@ class CapinhaServiceImplTest {
     fun deveSalvarUmaCapinha(){
         `when`(capinhaRepository.save(capinha)).thenReturn(capinha)
         var result = capinhaServiceImpl.create(capinha)
-        Assert.assertEquals("deveria salvar a capinha", result, Unit)
+        Assert.assertEquals("deveria salvar a capinha", capinha,result)
     }
 
     @Test

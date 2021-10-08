@@ -25,15 +25,17 @@ class CapinhaController {
     @PostMapping
     @ApiOperation(value = "Cadastra uma capinha")
     fun create(@RequestBody capinha: Capinha): ResponseEntity<Any> {
-        this.capinhaService.create(capinha)
-        logger.info("Capinha cadastrada",capinha)
+        logger.info("Capinha recebida {}",capinha)
+        var capinhaEntity = this.capinhaService.create(capinha)
         CapinhaUtils.validation(capinha)
-        return ResponseEntity(capinha, HttpStatus.CREATED)
+        logger.info("Retornando capinha {}",capinha)
+        return ResponseEntity(capinhaEntity, HttpStatus.CREATED)
     }
     @GetMapping
     @ApiOperation(value = "Mostra todas as capinhas")
     fun getAll(): ResponseEntity<Any> {
         var capinha = this.capinhaService.getAll()
+        logger.info("Retornando capinhas")
         return ResponseEntity(capinha, HttpStatus.OK)
     }
 
@@ -41,7 +43,7 @@ class CapinhaController {
     @ApiOperation(value = "Deleta uma capinha")
     fun delete(@PathVariable id: Long): ResponseEntity<Unit> {
         capinhaService.delete(id)
-        logger.info("Capinha deletada",id)
+        logger.info("Capinha deletada id {} ",id)
         return ResponseEntity(Unit, HttpStatus.NO_CONTENT)
     }
 
@@ -49,16 +51,16 @@ class CapinhaController {
     @ApiOperation(value = "Altera uma capinha")
     fun update(@PathVariable id: Long, @RequestBody capinha: Capinha): ResponseEntity<Any> {
         this.capinhaService.update(id, capinha)
-        logger.info("Capinha atualizada",capinha)
+        logger.info("Atualização recebida",capinha)
         CapinhaUtils.validation(capinha)
         return ResponseEntity(Unit, HttpStatus.OK)
     }
     @GetMapping("/{id}")
     @ApiOperation(value = "Mostra uma única capinha")
     fun getById(@PathVariable id: Long): ResponseEntity<Any> {
-        logger.info("Procurando capinha...")
+        logger.info("Id recebido")
         var capinha = this.capinhaService.getById(id)
-        logger.info("Capinha encontrada")
+        logger.info("Retornando capinha")
         return ResponseEntity(capinha, HttpStatus.OK)
     }
 
