@@ -1,9 +1,9 @@
 package com.capinhas.capinhas.repository
 
 import com.capinhas.capinhas.model.Capinha
-import org.springframework.data.repository.CrudRepository
+import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface CapinhaRepository: CrudRepository<Capinha, Long> {
+interface CapinhaRepository: JpaRepository<Capinha, Long> {
 }

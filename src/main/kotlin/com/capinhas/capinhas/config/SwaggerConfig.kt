@@ -28,10 +28,9 @@ class SwaggerConfig {
                     .title("API da loja de cases de celular")
                     .description("Api que possui todos os metodos da loja")
                     .version("1.0.0")
-                    .termsOfServiceUrl("exemplo")
                     .license("Lincença: GPLv3")
                     .licenseUrl("https://www.gnu.org/licenses/gpl-3.0.html")
-                    .contact(Contact("Yasmim Chyrlene", "exemplo", "yasmimchyrlene@hotmail.com"))
+                    .contact(Contact("Yasmim Chyrlene", "https://github.com/yasmimchyrlene", "yasmimchyrlene@hotmail.com"))
                     .build()
 
 }

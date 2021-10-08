@@ -12,6 +12,6 @@ data class Capinha(
         val id: Long? = null,
         val modelo: String = "",
         val cor: String = "",
-        val antiImpacto: Boolean = true,
+        val antiImpacto: Boolean = false,
         val preco: Double = 0.0,
 )

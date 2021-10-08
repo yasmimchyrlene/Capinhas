@@ -1,12 +1,18 @@
 package com.capinhas.capinhas.service
 
+import com.capinhas.capinhas.controller.handler.exception.NotFoundException
 import com.capinhas.capinhas.model.Capinha
 import com.capinhas.capinhas.repository.CapinhaRepository
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
 class CapinhaServiceImpl : CapinhaService {
+
+    var logger: Logger = LoggerFactory.getLogger(CapinhaServiceImpl::class.java)
+
     @Autowired
     lateinit var capinhaRepository: CapinhaRepository
 
@@ -15,11 +21,16 @@ class CapinhaServiceImpl : CapinhaService {
     }
 
     override fun getById(id: Long): Capinha {
-        return this.capinhaRepository.findById(id).orElse(null)
+         return capinhaRepository.findById(id).orElseThrow {NotFoundException("capinha não encontrada")}
     }
 
     override fun delete(id: Long) {
-        return this.capinhaRepository.deleteById(id)
+        try {
+            this.capinhaRepository.deleteById(id)
+        }catch (ex: Exception){
+            logger.info("ID não encontrado")
+
+        }
     }
 
     override fun update(id: Long, capinha: Capinha) {

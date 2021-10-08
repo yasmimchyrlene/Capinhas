@@ -2,17 +2,22 @@ package com.capinhas.capinhas.controller
 
 import com.capinhas.capinhas.model.Capinha
 import com.capinhas.capinhas.service.CapinhaService
+import com.capinhas.capinhas.utils.CapinhaUtils
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping(value = ["/capinhas"])
+@RequestMapping("/v1/capinhas")
 @Api(value = "API REST Capinhas")
 class CapinhaController {
+
+    var logger: Logger = LoggerFactory.getLogger(CapinhaController::class.java)
 
     @Autowired
     lateinit var capinhaService: CapinhaService
@@ -21,9 +26,10 @@ class CapinhaController {
     @ApiOperation(value = "Cadastra uma capinha")
     fun create(@RequestBody capinha: Capinha): ResponseEntity<Any> {
         this.capinhaService.create(capinha)
+        logger.info("Capinha cadastrada",capinha)
+        CapinhaUtils.validation(capinha)
         return ResponseEntity(capinha, HttpStatus.CREATED)
     }
-
     @GetMapping
     @ApiOperation(value = "Mostra todas as capinhas")
     fun getAll(): ResponseEntity<Any> {
@@ -35,18 +41,24 @@ class CapinhaController {
     @ApiOperation(value = "Deleta uma capinha")
     fun delete(@PathVariable id: Long): ResponseEntity<Unit> {
         capinhaService.delete(id)
+        logger.info("Capinha deletada",id)
         return ResponseEntity(Unit, HttpStatus.NO_CONTENT)
     }
 
     @PutMapping("/{id}")
     @ApiOperation(value = "Altera uma capinha")
-    fun update(@PathVariable id: Long, @RequestBody capinha: Capinha): ResponseEntity<Any> =
-            ResponseEntity(this.capinhaService.update(id, capinha), HttpStatus.OK)
-
+    fun update(@PathVariable id: Long, @RequestBody capinha: Capinha): ResponseEntity<Any> {
+        this.capinhaService.update(id, capinha)
+        logger.info("Capinha atualizada",capinha)
+        CapinhaUtils.validation(capinha)
+        return ResponseEntity(Unit, HttpStatus.OK)
+    }
     @GetMapping("/{id}")
     @ApiOperation(value = "Mostra uma única capinha")
     fun getById(@PathVariable id: Long): ResponseEntity<Any> {
+        logger.info("Procurando capinha...")
         var capinha = this.capinhaService.getById(id)
+        logger.info("Capinha encontrada")
         return ResponseEntity(capinha, HttpStatus.OK)
     }
 
