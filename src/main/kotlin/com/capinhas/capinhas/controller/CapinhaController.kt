@@ -25,9 +25,9 @@ class CapinhaController {
     @PostMapping
     @ApiOperation(value = "Cadastra uma capinha")
     fun create(@RequestBody capinha: Capinha): ResponseEntity<Any> {
+        CapinhaUtils.validation(capinha)
         logger.info("Capinha recebida {}",capinha)
         var capinhaEntity = this.capinhaService.create(capinha)
-        CapinhaUtils.validation(capinha)
         logger.info("Retornando capinha {}",capinha)
         return ResponseEntity(capinhaEntity, HttpStatus.CREATED)
     }
@@ -50,9 +50,9 @@ class CapinhaController {
     @PutMapping("/{id}")
     @ApiOperation(value = "Altera uma capinha")
     fun update(@PathVariable id: Long, @RequestBody capinha: Capinha): ResponseEntity<Any> {
+        CapinhaUtils.validation(capinha)
         this.capinhaService.update(id, capinha)
         logger.info("Atualização recebida",capinha)
-        CapinhaUtils.validation(capinha)
         return ResponseEntity(Unit, HttpStatus.OK)
     }
     @GetMapping("/{id}")
